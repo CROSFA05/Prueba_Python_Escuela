@@ -5,7 +5,10 @@ from miApp.views import (
     EscuelaAlta,
     EscuelaEditar,
     EscuelaEliminar,
-    Maestros
+    Maestros,
+    MaestroAlta,
+    MaestroEditar,
+    MaestroEliminar
 )
 
 urlpatterns = [
@@ -14,5 +17,8 @@ urlpatterns = [
     path('escuelas/alta', EscuelaAlta.as_view(), name='escuelas_alta'),
     path('escuelas/editar/<int:id>', EscuelaEditar.as_view(), name='escuelas_editar'),
     path('escuelas/eliminar/<int:id>', EscuelaEliminar.as_view(), name='escuelas_eliminar'),
-    path('maestros', Maestros.as_view(), name='maestros')
+    path('maestros', Maestros.as_view(), name='maestros'),
+    path('maestros/alta', MaestroAlta.as_view(), name='maestros_alta'),
+    path('maestros/editar/<int:id>', MaestroEditar.as_view(), name='maestros_editar'),
+    path('maestros/eliminar/<int:id>', MaestroEliminar.as_view(), name='maestros_eliminar'),
 ]

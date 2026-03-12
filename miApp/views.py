@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.views import View
 
 from miApp.models import Escuela, Maestro
-from miApp.forms import EscuelaForm
+from miApp.forms import EscuelaForm, MaestroForm
 
 # Create your views here.
 
@@ -91,3 +91,58 @@ class Maestros(View):
             "maestros": maestros
         }
         return render(request, 'maestros/maestros.html', cdx)
+
+class MaestroAlta(View):
+    def get(self, request):
+        form = MaestroForm()
+        cdx={
+            "titulo":"Maestro",
+            "subtitulo":"Alta de Maestro",
+            "form":form
+        }
+        return render(request, 'escuelas/CRUD.html', cdx)
+
+    def post(self, request):
+        form = MaestroForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect("maestros")
+        return redirect("home")
+
+class MaestroEditar(View):
+    def get(self, request, id):
+        maestro = Maestro.objects.filter(id=id).first()
+        form = MaestroForm(instance=maestro)
+        cdx={
+            "titulo":"Maestro",
+            "subtitulo":"Editar Maestro",
+            "form":form
+        }
+        return render(request, 'escuelas/CRUD.html', cdx)
+
+    def post(self, request, id):
+        maestro = Maestro.objects.filter(id=id).first()
+        form = MaestroForm(request.POST, request.FILES, instance=maestro)
+        if form.is_valid():
+            form.save()
+            return redirect("maestros")
+        return redirect("home")
+
+class MaestroEliminar(View):
+    def get(self, request, id):
+        maestro = Maestro.objects.filter(id=id).first()
+        form = MaestroForm(instance=maestro)
+        cdx={
+            "titulo":"Maestro",
+            "subtitulo":"Eliminar Maestro",
+            "form":form
+        }
+        return render(request, 'escuelas/CRUD.html', cdx)
+
+    def post(self, request, id):
+        maestro = Maestro.objects.filter(id=id).first()
+        form = MaestroForm(request.POST, request.FILES, instance=maestro)
+        if form.is_valid():
+            maestro.delete()
+            return redirect("maestros")
+        return redirect("home")

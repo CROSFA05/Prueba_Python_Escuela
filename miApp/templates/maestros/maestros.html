@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block encabezado %}
-<a href="{% url 'escuelas_alta' %}"><img src="{% static 'images/icons8-plus-32.png' %}"></a>
+<a href="{% url 'maestros_alta' %}"><img src="{% static 'images/icons8-plus-32.png' %}"></a>
 {% endblock %}
 
 {% block contenido %}
@@ -20,9 +20,9 @@
         {% for maestro in maestros %}
         <tr>
             <td>
-                <a href="{% url 'escuelas_eliminar' id=maestro.id %}"><img
+                <a href="{% url 'maestros_eliminar' id=maestro.id %}"><img
                         src="{% static 'images/icons8-delete-32.png' %}"></a>
-                <a href="{% url 'escuelas_editar' id=maestro.id %}"><img
+                <a href="{% url 'maestros_editar' id=maestro.id %}"><img
                         src="{% static 'images/edit-property-32.png' %}"></a>
             </td>
             <td>{{ maestro.nombre }}</td>
