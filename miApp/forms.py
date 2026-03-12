@@ -20,13 +20,13 @@ class MaestroForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
-                Column('nombre', css_class='form-group col-md-6 mb-0'),
-                Column('escuela', css_class='form-group col-md-6 mb-0'),
+                Column('nombre', css_class='form-group col-md-4 mb-0'),
+                Column('fecha_nacimiento', css_class='form-group col-md-4 mb-0'),
+                Column('sexo', css_class='form-group col-md-4 mb-0'),
                 css_class='form-row'
             ),
             Row(
-                Column('fecha_nacimiento', css_class='form-group col-md-6 mb-0'),
-                Column('sexo', css_class='form-group col-md-6 mb-0'),
+                Column('escuela', css_class='form-group col-md-12 mb-0'),
                 css_class='form-row'
             ),
             Submit('submit', 'Guardar', css_class='btn btn-success mt-3')

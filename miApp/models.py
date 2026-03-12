@@ -16,8 +16,7 @@ class Escuela(models.Model):
     siglas = models.CharField(max_length=10)
 
     def __str__(self):
-        cadena = f"({self.id}) {self.siglas}"
-        return cadena
+        return self.nombre
 
 class Maestro(models.Model):
     nombre = models.CharField(max_length=100)
