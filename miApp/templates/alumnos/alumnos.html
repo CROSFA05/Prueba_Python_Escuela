@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block encabezado %}
-<a href="{% url 'maestros_alta' %}"><img src="{% static 'images/icons8-plus-32.png' %}"></a>
+<a href="{% url 'alumnos_alta' %}"><img src="{% static 'images/icons8-plus-32.png' %}"></a>
 {% endblock %}
 
 {% block contenido %}
@@ -13,22 +13,24 @@
                 <th>Acciones</th>
                 <th>Nombre</th>
                 <th>Escuela</th>
+                <th>Maestro</th>
                 <th>Sexo</th>
                 <th>Fecha de Nacimiento</th>
             </tr>
         </thead>
-        {% for maestro in maestros %}
+        {% for alumno in alumnos %}
         <tr>
             <td>
-                <a href="{% url 'maestros_eliminar' id=maestro.id %}"><img
+                <a href="{% url 'alumnos_eliminar' id=alumno.id %}"><img
                         src="{% static 'images/icons8-delete-32.png' %}"></a>
-                <a href="{% url 'maestros_editar' id=maestro.id %}"><img
+                <a href="{% url 'alumnos_editar' id=alumno.id %}"><img
                         src="{% static 'images/edit-property-32.png' %}"></a>
             </td>
-            <td>{{ maestro.nombre }}</td>
-            <td>{{ maestro.escuela.siglas }}</td>
-            <td>{{ maestro.get_sexo_display }}</td>
-            <td>{{ maestro.fecha_nacimiento }}</td>
+            <td>{{ alumno.nombre }}</td>
+            <td>{{ alumno.escuela.siglas }}</td>
+            <td>{{ alumno.maestro.nombre }}</td>
+            <td>{{ alumno.get_sexo_display }}</td>
+            <td>{{ alumno.fecha_nacimiento }}</td>
         </tr>
         {% endfor %}
     </table>

@@ -24,9 +24,15 @@ class Maestro(models.Model):
     sexo = models.IntegerField(choices=SEXO, default=NEUTRO, null=False)
     fecha_nacimiento = models.DateField(null=False)
 
+    def __str__(self):
+        return self.nombre
+
 class Alumno(models.Model):
     nombre = models.CharField(max_length=100)
     escuela = models.ForeignKey(Escuela, on_delete=models.PROTECT, null=False)
     maestro = models.ForeignKey(Maestro, on_delete=models.PROTECT, null=False)
     sexo = models.IntegerField(choices=SEXO, default=NEUTRO, null=False)
     fecha_nacimiento = models.DateField(null=False)
+
+    def __str__(self):
+        return self.nombre

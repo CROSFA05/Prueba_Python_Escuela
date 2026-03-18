@@ -1,8 +1,8 @@
 from django.shortcuts import redirect, render
 from django.views import View
 
-from miApp.models import Escuela, Maestro
-from miApp.forms import EscuelaForm, MaestroForm
+from miApp.models import Escuela, Maestro, Alumno
+from miApp.forms import EscuelaForm, MaestroForm, AlumnoForm
 
 # Create your views here.
 
@@ -100,7 +100,7 @@ class MaestroAlta(View):
             "subtitulo":"Alta de Maestro",
             "form":form
         }
-        return render(request, 'escuelas/CRUD.html', cdx)
+        return render(request, 'maestros/CRUD.html', cdx)
 
     def post(self, request):
         form = MaestroForm(request.POST, request.FILES)
@@ -118,7 +118,7 @@ class MaestroEditar(View):
             "subtitulo":"Editar Maestro",
             "form":form
         }
-        return render(request, 'escuelas/CRUD.html', cdx)
+        return render(request, 'maestros/CRUD.html', cdx)
 
     def post(self, request, id):
         maestro = Maestro.objects.filter(id=id).first()
@@ -137,7 +137,7 @@ class MaestroEliminar(View):
             "subtitulo":"Eliminar Maestro",
             "form":form
         }
-        return render(request, 'escuelas/CRUD.html', cdx)
+        return render(request, 'maestros/CRUD.html', cdx)
 
     def post(self, request, id):
         maestro = Maestro.objects.filter(id=id).first()
@@ -145,4 +145,69 @@ class MaestroEliminar(View):
         if form.is_valid():
             maestro.delete()
             return redirect("maestros")
+        return redirect("home")
+
+class Alumnos(View):
+    def get(self, request):
+        alumnos = Alumno.objects.all()
+        cdx={
+            "titulo":"Alumnos",
+            "subtitulo":"Lista de alumnos",
+            "alumnos": alumnos
+        }
+        return render(request, 'alumnos/alumnos.html', cdx)
+
+class AlumnoAlta(View):
+    def get(self, request):
+        form = AlumnoForm()
+        cdx={
+            "titulo":"Alumno",
+            "subtitulo":"Alta de Alumno",
+            "form":form
+        }
+        return render(request, 'alumnos/CRUD.html', cdx)
+
+    def post(self, request):
+        form = AlumnoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect("alumnos")
+        return redirect("home")
+
+class AlumnoEditar(View):
+    def get(self, request, id):
+        alumno = Alumno.objects.filter(id=id).first()
+        form = AlumnoForm(instance=alumno)
+        cdx={
+            "titulo":"Alumno",
+            "subtitulo":"Editar Alumno",
+            "form":form
+        }
+        return render(request, 'alumnos/CRUD.html', cdx)
+
+    def post(self, request, id):
+        alumno = Alumno.objects.filter(id=id).first()
+        form = AlumnoForm(request.POST, request.FILES, instance=alumno)
+        if form.is_valid():
+            form.save()
+            return redirect("alumnos")
+        return redirect("home")
+
+class AlumnoEliminar(View):
+    def get(self, request, id):
+        alumno = Alumno.objects.filter(id=id).first()
+        form = AlumnoForm(instance=alumno)
+        cdx={
+            "titulo":"Alumno",
+            "subtitulo":"Eliminar Alumno",
+            "form":form
+        }
+        return render(request, 'alumnos/CRUD.html', cdx)
+
+    def post(self, request, id):
+        alumno = Alumno.objects.filter(id=id).first()
+        form = AlumnoForm(request.POST, request.FILES, instance=alumno)
+        if form.is_valid():
+            alumno.delete()
+            return redirect("alumnos")
         return redirect("home")

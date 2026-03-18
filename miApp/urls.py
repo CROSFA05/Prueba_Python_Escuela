@@ -8,7 +8,11 @@ from miApp.views import (
     Maestros,
     MaestroAlta,
     MaestroEditar,
-    MaestroEliminar
+    MaestroEliminar,
+    Alumnos,
+    AlumnoAlta,
+    AlumnoEditar,
+    AlumnoEliminar
 )
 
 urlpatterns = [
@@ -21,4 +25,8 @@ urlpatterns = [
     path('maestros/alta', MaestroAlta.as_view(), name='maestros_alta'),
     path('maestros/editar/<int:id>', MaestroEditar.as_view(), name='maestros_editar'),
     path('maestros/eliminar/<int:id>', MaestroEliminar.as_view(), name='maestros_eliminar'),
+    path('alumnos', Alumnos.as_view(), name='alumnos'),
+    path('alumnos/alta', AlumnoAlta.as_view(), name='alumnos_alta'),
+    path('alumnos/editar/<int:id>', AlumnoEditar.as_view(), name='alumnos_editar'),
+    path('alumnos/eliminar/<int:id>', AlumnoEliminar.as_view(), name='alumnos_eliminar'),
 ]
