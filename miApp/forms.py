@@ -1,7 +1,7 @@
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
-from models import Escuela, Maestro, Alumno
+from miApp.models import Escuela, Maestro, Alumno
 
 class EscuelaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

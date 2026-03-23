@@ -1,4 +1,5 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
 from miApp.views import (
     Home,
     Escuelas,
@@ -14,9 +15,16 @@ from miApp.views import (
     AlumnoEditar,
     AlumnoEliminar
 )
+from miApp.viewsets import EscuelaViewSet, MaestroViewSet, AlumnoViewSet
+
+router = routers.DefaultRouter()
+router.register(r'escuelas', EscuelaViewSet)
+router.register(r'maestros', MaestroViewSet)
+router.register(r'alumnos', AlumnoViewSet)
 
 urlpatterns = [
     path('', Home.as_view(), name='home'),
+    path('api/', include(router.urls)),
     path('escuelas', Escuelas.as_view(), name='escuelas'),
     path('escuelas/alta', EscuelaAlta.as_view(), name='escuelas_alta'),
     path('escuelas/editar/<int:id>', EscuelaEditar.as_view(), name='escuelas_editar'),
