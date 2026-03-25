@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -16,7 +17,7 @@ class Escuela(models.Model):
     siglas = models.CharField(max_length=10)
 
     def __str__(self):
-        return self.nombre
+        return self.nombre + " " + self.siglas
 
 class Maestro(models.Model):
     nombre = models.CharField(max_length=100)
@@ -36,3 +37,12 @@ class Alumno(models.Model):
 
     def __str__(self):
         return self.nombre
+
+    def clean(self):
+        if self.maestro_id and self.escuela_id:
+            if self.maestro.escuela_id != self.escuela_id:
+                raise ValidationError({"maestro": "El maestro debe pertenecer a la misma escuela que el alumno"})
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)

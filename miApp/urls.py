@@ -15,9 +15,12 @@ from miApp.views import (
     AlumnoEditar,
     AlumnoEliminar
 )
-from miApp.viewsets import EscuelaViewSet, MaestroViewSet, AlumnoViewSet
+from miApp.viewsets import UserViewSet, GroupViewSet, EscuelaViewSet, MaestroViewSet, AlumnoViewSet, PermissionViewSet
 
 router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
+router.register(r'groups', GroupViewSet)
+router.register(r'permissions', PermissionViewSet)
 router.register(r'escuelas', EscuelaViewSet)
 router.register(r'maestros', MaestroViewSet)
 router.register(r'alumnos', AlumnoViewSet)

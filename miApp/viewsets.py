@@ -2,7 +2,22 @@ from django.urls import path, include
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from miApp.models import Escuela, Maestro, Alumno
-from miApp.serializers import EscuelaSerializer, MaestroSerializer, AlumnoSerializer
+from miApp.serializers import EscuelaSerializer, MaestroSerializer, AlumnoSerializer, UserSerializer
+from django.contrib.auth.models import Group
+from miApp.serializers import GroupSerializer
+from django.contrib.auth.models import Permission, permissionsSerializer
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
+class PermissionViewSet(viewsets.ModelViewSet):
+    queryset = Permission.objects.all()
+    serializer_class = permissionsSerializer
 
 class EscuelaViewSet(viewsets.ModelViewSet):
     queryset = Escuela.objects.all()
